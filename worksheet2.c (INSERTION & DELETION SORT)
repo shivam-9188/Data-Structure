@@ -1,5 +1,25 @@
 #include <stdio.h>
 
+void printArray(int arr[], int n) {
+    printf("Current array elements:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void sortArray(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
 void Insertion(int arr[], int *n) {
     int value;
     printf("Enter the value to insert: ");
@@ -14,10 +34,7 @@ void Insertion(int arr[], int *n) {
     (*n)++;
 
     printf("After Insertion:\n");
-    for (int i = 0; i < *n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
+    printArray(arr, *n);
 }
 
 void Deletion(int arr[], int *n) {
@@ -36,10 +53,7 @@ void Deletion(int arr[], int *n) {
     (*n)--;
 
     printf("After Deletion:\n");
-    for (int i = 0; i < *n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
+    printArray(arr, *n);
 }
 
 void LinearSearch(int arr[], int n) {
@@ -61,6 +75,10 @@ void BinarySearch(int arr[], int n) {
     int key;
     printf("Enter the element to search: ");
     scanf("%d", &key);
+
+    sortArray(arr, n);  // Sort before binary search
+    printf("Array sorted for binary search:\n");
+    printArray(arr, n);
 
     int low = 0, high = n - 1, mid;
 
@@ -89,11 +107,7 @@ int main() {
         scanf("%d", &arr[i]);
     }
 
-    printf("\nArray elements are:\n");
-    for (i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
+    printArray(arr, n);
 
     do {
         printf("\n--- MENU ---\n");
